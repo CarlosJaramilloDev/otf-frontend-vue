@@ -1,0 +1,19 @@
+{
+  "name": "otf-frontend-vue",
+  "version": "1.0.0",
+  "description": "OTF FrontEnd made with VueJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosJaramilloDev/otf-frontend-vue.git"
+  },
+  "author": "Carlos Jaramillo Dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarlosJaramilloDev/otf-frontend-vue/issues"
+  },
+  "homepage": "https://github.com/CarlosJaramilloDev/otf-frontend-vue#readme"
+}
