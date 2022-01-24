@@ -7,7 +7,7 @@
           <input
             class="input-sm"
             id="filter"
-            placeholder="Buscar..."
+            placeholder="Search..."
             type="text"
             v-model="filter"
           />

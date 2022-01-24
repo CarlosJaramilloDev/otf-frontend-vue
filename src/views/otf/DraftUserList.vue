@@ -7,7 +7,7 @@
           <input
             class="input-sm"
             id="filter"
-            placeholder="Buscar..."
+            placeholder="Search..."
             type="text"
             v-model="filter"
           />
@@ -47,14 +47,11 @@
                   >
                     <button class="btn btn-warning mx-2">Update</button>
                   </router-link>
-                  <router-link
-                    v-bind:to="{
-                      name: 'draft-user-delete',
-                      params: { id: u.id },
-                    }"
+                  <button class="btn btn-danger"
+                    @click="deleteDraftUser(u.id)"
                   >
-                    <button class="btn btn-danger">Delete</button>
-                  </router-link>
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -65,7 +62,7 @@
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <button class="btn-learn-more" v-on="sync">
+          <button class="btn-learn-more" @click="syncDraftTable">
             Push changes to server
           </button>
         </div>
@@ -94,13 +91,35 @@ export default {
       try {
         const { data, error } = await api.getDraftUsers();
         if (!error) {
-          console.log(data.results);
           return (this.dataList = data.results);
         }
         throw error;
       } catch (error) {
-        console.log(error.message);
-        alert(error.message);
+        console.log(error);
+      }
+    },
+    async deleteDraftUser(id) {
+      try {
+        const { data, error } = await api.deleteDraftUser(id);
+        if (!error) {
+          alert("User deleted")
+          return location.reload();
+        }
+        throw error;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async syncDraftTable() {
+      try {
+        const { data, error } = await api.syncDraftTable();
+        if (!error) {
+          alert("Successfully synchronized table")
+          return this.$router.push({name: 'published-user-list'})
+        }
+        throw error;
+      } catch (error) {
+        console.log(error);
       }
     },
   },

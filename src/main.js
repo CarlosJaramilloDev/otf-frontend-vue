@@ -30,11 +30,6 @@ const routes = [
           component: DraftUserUpdate
         },
         {
-          path: "/otf/draft-users/delete/:id",
-          name: "draft-user-delete",
-          component: DraftUserList
-        },
-        {
           path: "/otf/users",
           name: "published-user-list",
           component: PublishedUserList

@@ -2,7 +2,7 @@
   <section id="about" class="about mt-5 section-bg">
     <div class="container">
       <div class="section-title" data-aos="fade-up">
-        <h2>New user</h2>
+        <h2>Update user</h2>
       </div>
       <div class="row content justify-content-center">
         <div
@@ -44,7 +44,7 @@
             />
           </div>
           <div class="text-center">
-            <button id="sendB" @click="saveDraftUser">Save</button>
+            <button id="sendB" @click="updateDraftUser">Update</button>
           </div>
         </div>
       </div>
@@ -57,30 +57,47 @@
 import api from "@/api";
 
 export default {
-  name: "DraftUserCreate",
+  name: "DraftUserUpdate",
   data() {
     return {
-      document_id: undefined,
       name: undefined,
-      last_name: undefined
+      last_name: undefined,
+      document_id: undefined,
+      id: undefined,
     };
   },
+  created() {
+    this.id = this.$route.params.id;
+    this.getDraftUser();
+  },
   methods: {
-    async saveDraftUser() {
+    async getDraftUser() {
+      try {
+        const { data, error } = await api.getDraftUser(this.id);
+        if (!error) {
+          this.name = data.values.name;
+          this.last_name = data.values.last_name;
+          this.document_id = data.values.document_id;
+        }
+        throw error;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updateDraftUser() {
       try {
         if(!this.document_id || !this.name || !this.last_name ){
           alert('All fields are required')
           return false;
         }
-        const { data, error } = await api.saveDraftUser(this.document_id.toString(), this.name, this.last_name);
+        const { data, error } = await api.updateDraftUser(this.id, this.document_id.toString(), this.name, this.last_name);
         if (!error) {
-          alert("User created")
+          alert("User updated")
           return this.$router.push({name: 'draft-user-list'})
         }
         throw error;
       } catch (error) {
-        console.log(error.message);
-        alert(error.message);
+        console.log(error);
       }
     },
   },
