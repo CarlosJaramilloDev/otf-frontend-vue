@@ -19,8 +19,9 @@
   },
   "homepage": "https://github.com/CarlosJaramilloDev/otf-frontend-vue#readme",
   "dependencies": {
-    "vue": "3.0.7",
-    "vue-router": "^3.5.3"
+    "core-js": "^3.20.3",
+    "vue": "^3.2.29",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.15",
